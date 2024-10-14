@@ -137,7 +137,9 @@
 ### B. Additional Visualizations and Tables
 ### C. Python Code Notebook (with comments for reproducibility)
 
----
+
+
+------------------------------------------------
 
 ## README
 
@@ -157,9 +159,15 @@ This project presents an unsupervised learning analysis of the Breast Cancer Wis
 4. Refer to the markdown document for a detailed report of findings and insights
 
 ### Contributors:
-[List of contributors]
+This project uses the Breast Cancer Wisconsin (Diagnostic) Data Set from the UCI Machine Learning Repository. The original contributors to this dataset are:
+
+1. Dr. William H. Wolberg, General Surgery Dept., University of Wisconsin, Clinical Sciences Center, Madison, WI 53792
+2. W. Nick Street, Computer Sciences Dept., University of Wisconsin, 1210 West Dayton St., Madison, WI 53706
+3. Olvi L. Mangasarian, Computer Sciences Dept., University of Wisconsin, 1210 West Dayton St., Madison, WI 53706
+
+For more information about the dataset, visit: https://archive.ics.uci.edu/dataset/17/breast+cancer+wisconsin+diagnostic
 
 ### License:
-[Specify the license]
+This project is licensed under the MIT License.
 
 For any questions or feedback, please open an issue in this repository.
