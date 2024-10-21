@@ -1,8 +1,5 @@
 # Unsupervised Learning for Tumor Segmentation in the Breast Cancer Wisconsin Dataset
 
-## Table of Contents
-# Unsupervised Machine Learning Course Final Project: Breast Cancer Wisconsin Dataset Analysis
-
 By: Mandy Wu
 
 Date: 2024-10-21
