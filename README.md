@@ -1,4 +1,4 @@
-# Unsupervised Learning Analysis of Breast Cancer Wisconsin Dataset
+# Unsupervised Learning for Tumor Segmentation in the Breast Cancer Wisconsin Dataset
 
 ## Table of Contents
 1. [Executive Summary](#1-executive-summary)
