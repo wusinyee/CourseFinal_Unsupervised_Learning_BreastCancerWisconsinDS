@@ -29,7 +29,7 @@
 
 ## 3. Dataset Description
 ### 3.1. Overview of the Breast Cancer Wisconsin Dataset
-- Source: UCI Machine Learning Repository
+- Source: [Breast Cancer Wisconsin (Diagnostic) Data Set](https://www.kaggle.com/datasets/uciml/breast-cancer-wisconsin-data)
 - Composition: 569 samples, 30 numerical features
 - Detailed explanation of feature categories (e.g., radius, texture, perimeter)
 
