@@ -72,12 +72,6 @@ The practical implications of this study include the potential for more precise 
 
 This project presents an unsupervised learning analysis of the Breast Cancer Wisconsin Dataset. The main objective is to use clustering techniques to identify distinct groups of breast cancer tumors, potentially enhancing current diagnostic methods and contributing to personalized treatment strategies.
 
-### Key Features:
-- Comprehensive exploratory data analysis
-- Implementation of multiple clustering algorithms (K-Means, Hierarchical, DBSCAN)
-- Detailed interpretation of clustering results
-- Implications for breast cancer diagnosis and treatment
-- Recommendations for future research and applications
 
 ### How to Use:
 1. Clone this repository
