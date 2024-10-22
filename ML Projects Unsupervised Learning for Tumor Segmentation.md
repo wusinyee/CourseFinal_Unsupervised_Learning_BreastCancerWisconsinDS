@@ -122,9 +122,6 @@ In this section, I conducted a thorough assessment of the data quality to ensure
 
 3. Feature Distributions: I examined the distribution of each feature using histograms and normal probability plots. Many features showed right-skewed distributions, which is common in biological data.
 
-4. Feature Correlations: A correlation heatmap was created to visualize the relationships between features. Strong correlations were observed between related measurements (e.g., mean radius and mean area), which is expected given the nature of the features.
-
-![Correlation Heatmap of Features](EDA.png)
 
 ![Pairwise Relationships](EDA2.png)
 
@@ -160,15 +157,18 @@ To gain deeper insights into the data structure and relationships between featur
 
 1. t-SNE Visualization: A t-SNE plot was created to visualize the high-dimensional data in a 2D space, revealing potential clusters and data structure.
 
-[Insert t-SNE plot here]
+![t-SNE Visualization of the dataset](EDA5t.png)
 
 2. Feature Distribution Comparison: Box plots were used to compare the distribution of key features between benign and malignant samples.
 
-[Insert box plots here]
+![Distribution of radius_mean by Diagnois](EDA5boxplat.png)
 
 3. Correlation Analysis: A detailed examination of the correlation heatmap revealed strong correlations between size-related features (radius, perimeter, area) and texture-related features.
 
+![Correlation Heatmap of Features](EDA5correlation.png)
+
 These exploratory analyses provided valuable insights that guided the selection and interpretation of our clustering models.
+
 
 ## 6. Unsupervised Learning Models
 
@@ -176,10 +176,13 @@ These exploratory analyses provided valuable insights that guided the selection 
 
 K-Means clustering is a popular algorithm that aims to partition n observations into k clusters. We applied K-Means as follows:
 1.	Determined the optimal number of clusters using the elbow method.
-2.	Applied K-Means with the optimal number of clusters.
-3.	Visualized the clustering results in the PCA-reduced space.
 
-[This plot shows the results of K-Means clustering in the PCA-reduced space. Each colour represents a different cluster, illustrating how K-Means has grouped similar samples together.]
+![Elbow Method for Optimal k](kmeancluster.png)
+   
+3.	Applied K-Means with the optimal number of clusters.
+4.	Visualized the clustering results in the PCA-reduced space.
+
+![K-Means Clustering Results](kmeancluster2.png)
 
 ### 6.2. Hierarchical Clustering
 
@@ -187,16 +190,23 @@ Hierarchical clustering creates a tree-like hierarchy of clusters. We performed 
 1.	Created a dendrogram to visualize the hierarchical relationship between clusters.
 2.	Analyzed the dendrogram to determine an appropriate number of clusters.
 
-[This tree-like diagram shows how samples are grouped at different levels of similarity. The height of each branch indicates the distance between clusters, helping to identify natural groupings in the data.]
+![Dendrogram](hireaclus.png)
+
+The dendrogram shows how samples are grouped at different levels of similarity. The height of each branch indicates the distance between clusters, helping to identify natural groupings in the data.
 
 ### 6.3. DBSCAN
 
 DBSCAN groups together points that are closely packed together, marking as outliers’ points that lie alone in low-density regions. We applied DBSCAN as follows:
 1.	Determined optimal epsilon using the k-distance graph.
-2.	Applied DBSCAN with the chosen parameters.
-3.	Visualized the clustering results in the PCA-reduced space.
 
-[This plot displays the results of DBSCAN clustering. Different colours represent distinct clusters, while black points are considered noise. This method can identify clusters of arbitrary shape.]
+![K-distance Graph](DBscan1.png)
+
+3.	Applied DBSCAN with the chosen parameters.
+4.	Visualized the clustering results in the PCA-reduced space.
+
+![DBSCAN Clustering Results](DBscan2.png)
+
+This plot displays the results of DBSCAN clustering. Different colours represent distinct clusters, while black points are considered noise. This method can identify clusters of arbitrary shape.
 
 ### 6.4. Gaussian Mixture Models
 
