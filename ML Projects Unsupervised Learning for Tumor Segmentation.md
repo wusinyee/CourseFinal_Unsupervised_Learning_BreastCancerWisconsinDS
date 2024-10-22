@@ -220,7 +220,7 @@ Methodology:
 Results:
 The GMM identified 3 main clusters, aligning with the results from K-Means and Hierarchical Clustering. However, GMM provided additional insights into the uncertainty of cluster assignments, which is particularly valuable for samples that may lie on the borderlines between clusters.
 
-[Insert GMM clustering visualization here]
+[GMM clustering results and probability](GMM.png)
 
 Comparison with Other Methods:
 GMM showed comparable performance to K-Means in terms of cluster separation but offered the advantage of providing probability estimates for cluster membership. This probabilistic approach aligns well with the continuous nature of biological variations in tumor characteristics.
