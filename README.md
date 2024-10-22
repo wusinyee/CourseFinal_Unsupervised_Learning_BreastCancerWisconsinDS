@@ -5,8 +5,6 @@ By: Mandy Wu
 Date: 2024-10-21
 
 
-## Table of Contents
-
 | Section | Title |
 |---------|-------|
 | 1 | Executive Summary |
@@ -17,31 +15,33 @@ Date: 2024-10-21
 | 3.1 | Overview of the Breast Cancer Wisconsin (Diagnostic) Dataset |
 | 3.2 | Relevance to the Analysis |
 | 3.3 | Feature Significance in Breast Cancer Diagnosis |
-| 4 | Data Exploration and Preprocessing |
-| 4.1 | Exploratory Data Analysis (EDA) |
+| 4 | Data Quality Assessment and Preprocessing |
+| 4.1 | Data Quality Assessment |
 | 4.2 | Data Cleaning and Preparation |
 | 4.3 | Feature Engineering |
-| 5 | Unsupervised Learning Models |
-| 5.1 | K-Means Clustering |
-| 5.2 | Hierarchical Clustering |
-| 5.3 | DBSCAN |
-| 6 | Model Evaluation and Interpretation |
-| 6.1 | Selection of Final Model |
-| 6.2 | Justification for the Chosen Model |
-| 6.3 | How it Best Addresses the Analysis Objectives |
-| 6.4 | Cross-Validation for Clustering |
-| 6.5 | Interpretation Techniques |
-| 7 | Key Findings and Insights |
-| 7.1 | Main Discoveries |
-| 7.2 | Relation to Known Tumor Classifications |
-| 8 | Limitations of the Study |
-| 9 | Recommendations and Next Steps |
-| 9.1 | Short-term Actions |
-| 9.2 | Long-term Research Directions |
-| 9.3 | Next Steps |
-| 9.4 | Ethical Considerations and Data Privacy |
-| 10 | Conclusion |
-| 11 | Appendix: Code and Additional Visualizations |
+| 5 | Exploratory Data Analysis (EDA) |
+| 6 | Unsupervised Learning Models |
+| 6.1 | K-Means Clustering |
+| 6.2 | Hierarchical Clustering |
+| 6.3 | DBSCAN |
+| 6.4 | Gaussian Mixture Models |
+| 7 | Model Evaluation and Interpretation |
+| 7.1 | Selection of Final Model |
+| 7.2 | Justification for the Chosen Model |
+| 7.3 | How it Best Addresses the Analysis Objectives |
+| 7.4 | Cross-Validation for Clustering |
+| 7.5 | Interpretation Techniques |
+| 8 | Key Findings and Insights |
+| 8.1 | Main Discoveries |
+| 8.2 | Relation to Known Tumor Classifications |
+| 9 | Limitations of the Study |
+| 10 | Practical Implications |
+| 11 | Ethical Considerations and Data Privacy |
+| 12 | Recommendations and Next Steps |
+| 12.1 | Short-term Actions |
+| 12.2 | Long-term Research Directions |
+| 13 | Conclusion |
+| 14 | Appendix: Code and Additional Visualizations |
 
 ## 1. Executive Summary
 
