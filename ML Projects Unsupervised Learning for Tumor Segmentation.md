@@ -43,6 +43,11 @@ Sin Yee Wu (Mandy)
 | 13 | Conclusion |
 | 14 | Appendix: Code and Additional Visualizations |
 
+
+
+---
+
+
 ## 1. Executive Summary
 
 In this study, I employed unsupervised learning techniques to analyze the Breast Cancer Wisconsin (Diagnostic) Dataset. My goal was to identify distinct groups of breast tumors based on their cellular characteristics, potentially uncovering new insights into tumor classification and improving diagnostic procedures. I used K-Means clustering, Hierarchical Clustering, DBSCAN, and Gaussian Mixture Models, complemented by dimensionality reduction techniques.
@@ -53,6 +58,8 @@ The analysis revealed a complex structure within the data, suggesting a spectrum
 2. Cluster 2: 184 samples (32.3%)
 3. Cluster 3: 173 samples (30.4%)
 
+![Distribution of Samples in Clusters](dissampclus.png)
+
 This insight could lead to more nuanced diagnostic approaches and personalized treatment strategies in breast cancer care. The silhouette score of 0.298 (±0.030) indicates a reasonable clustering quality, suggesting that while the clusters are distinguishable, there is some overlap between them.
 
 The practical implications of this study include the potential for more precise tumor classification, which could inform treatment decisions and improve patient outcomes. However, further clinical validation is necessary before these findings can be integrated into medical practice.
@@ -61,25 +68,47 @@ The practical implications of this study include the potential for more precise 
 
 ### 2.1. Main Objective of the Analysis
 
-[Your existing content]
+My main objective in this analysis is to apply clustering techniques to the Breast Cancer Wisconsin (Diagnostic) Dataset. I aim to identify distinct groups of tumors based on their cellular characteristics, potentially uncovering new insights into tumor classification. This unsupervised learning approach could lead to improved diagnostic procedures and more personalized treatment strategies in breast cancer care. By focusing on clustering, I hope to reveal patterns that might not be apparent in the traditional binary (benign/malignant) classification, offering a more nuanced understanding of tumor variability.
 
 ### 2.2. Background on Breast Cancer Diagnosis
 
-[Your existing content]
+Breast cancer diagnosis typically involves imaging techniques and tissue analysis, often using Fine Needle Aspiration (FNA). While traditional approaches categorize tumors as benign or malignant, my unsupervised learning techniques aim to reveal more nuanced groupings that may not align perfectly with this binary classification.
 
 ## 3. Dataset Description
 
 ### 3.1. Overview of the Breast Cancer Wisconsin (Diagnostic) Dataset
 
-[Your existing content]
+Source: Kaggle Breast Cancer Wisconsin (Diagnostic) Dataset
+The dataset contains 569 samples with 30 features each, computed from digitized images of FNA of breast masses. These features describe various characteristics of the cell nuclei present in the images.
+
+![Dataset Composition](figure1datasetcomp.jpg)
+
+![Feature Categories](fg2featurecategories.jpg)
+
+![Distribution of Malignant and Benign Samples](fg3distributionofbmsamples.jpg)
 
 ### 3.2. Relevance to the Analysis
 
-[Your existing content]
+This dataset is well-suited for the unsupervised learning project on tumor segmentation because:
+•	It contains real-world medical data relevant to breast cancer diagnosis.
+•	The features provide detailed information about cell nuclei characteristics, which can be used to identify patterns or groups.
+•	The presence of both benign and malignant samples allows for potential validation of clustering results.
+•	The number of features and samples is sufficient for meaningful unsupervised learning analysis.
+
 
 ### 3.3. Feature Significance in Breast Cancer Diagnosis
 
-[Your existing content]
+Key features include radius, texture, perimeter, area, smoothness, compactness, concavity, concave points, symmetry, and fractal dimension of cell nuclei. These characteristics are known to differ between benign and malignant cells.
+
+![Distribution of radius_mean](fg4disofmean1.jpg)
+
+![Distribution of texture_mean](fg4disofmean2.jpg)
+
+![Distribution of perimeter_mean](fg4disofmean3.jpg)
+
+![Distribution of area_mean](fg4disofmean4.jpg)
+
+These histograms show the distribution of key features like radius, texture, perimeter, and area. The shape and spread of these distributions can indicate how these characteristics differ between tumor types.
 
 ## 4. Data Quality Assessment and Preprocessing
 
@@ -95,7 +124,9 @@ In this section, I conducted a thorough assessment of the data quality to ensure
 
 4. Feature Correlations: A correlation heatmap was created to visualize the relationships between features. Strong correlations were observed between related measurements (e.g., mean radius and mean area), which is expected given the nature of the features.
 
-[Insert correlation heatmap here]
+![Correlation Heatmap of Features](EDA.png)
+
+![Pairwise Relationships](EDA2.png)
 
 ### 4.2. Data Cleaning and Preparation
 
@@ -117,7 +148,11 @@ Principal Component Analysis (PCA) was employed as our main feature engineering 
 
 The first two principal components accounted for 63.2% of the total variance in the dataset. A scree plot was used to determine the optimal number of components to retain for further analysis.
 
-[Insert PCA scree plot here]
+![Principal Component Analysis of the Dataset](PCAresults.png)
+
+
+This scatter plot shows samples projected onto the first two principal components. The separation visible here suggests that PCA has captured meaningful differences between tumor types, even before applying clustering algorithms.
+
 
 ## 5. Exploratory Data Analysis (EDA)
 
@@ -139,15 +174,29 @@ These exploratory analyses provided valuable insights that guided the selection 
 
 ### 6.1. K-Means Clustering
 
-[Your existing content]
+K-Means clustering is a popular algorithm that aims to partition n observations into k clusters. We applied K-Means as follows:
+1.	Determined the optimal number of clusters using the elbow method.
+2.	Applied K-Means with the optimal number of clusters.
+3.	Visualized the clustering results in the PCA-reduced space.
+
+[This plot shows the results of K-Means clustering in the PCA-reduced space. Each colour represents a different cluster, illustrating how K-Means has grouped similar samples together.]
 
 ### 6.2. Hierarchical Clustering
 
-[Your existing content]
+Hierarchical clustering creates a tree-like hierarchy of clusters. We performed agglomerative hierarchical clustering:
+1.	Created a dendrogram to visualize the hierarchical relationship between clusters.
+2.	Analyzed the dendrogram to determine an appropriate number of clusters.
+
+[This tree-like diagram shows how samples are grouped at different levels of similarity. The height of each branch indicates the distance between clusters, helping to identify natural groupings in the data.]
 
 ### 6.3. DBSCAN
 
-[Your existing content]
+DBSCAN groups together points that are closely packed together, marking as outliers’ points that lie alone in low-density regions. We applied DBSCAN as follows:
+1.	Determined optimal epsilon using the k-distance graph.
+2.	Applied DBSCAN with the chosen parameters.
+3.	Visualized the clustering results in the PCA-reduced space.
+
+[This plot displays the results of DBSCAN clustering. Different colours represent distinct clusters, while black points are considered noise. This method can identify clusters of arbitrary shape.]
 
 ### 6.4. Gaussian Mixture Models
 
@@ -170,15 +219,40 @@ GMM showed comparable performance to K-Means in terms of cluster separation but 
 
 ### 7.1. Selection of Final Model
 
-[Your existing content]
+I trained and evaluated three different clustering models:
+
+**a. K-Means Clustering**
+
+I used the elbow method to determine the optimal number of clusters, which suggested 3 clusters. This aligns with the possibility of having benign, malignant, and potentially an intermediate group.
+
+**b. Hierarchical Clustering**
+
+I used agglomerative clustering with Ward's method as the linkage criterion. I created a dendrogram to visualize the hierarchical structure of the data and chose to cut the tree to form 3 clusters for consistency with the K-Means results.
+
+**c. DBSCAN**
+
+I used the k-distance graph to estimate an appropriate epsilon value and set min_samples to 5. This method allowed for the detection of clusters with arbitrary shapes and the identification of outliers.
+
+**Final Model Selection:** After careful evaluation, I selected **Hierarchical Clustering** as the final model.
 
 ### 7.2. Justification for the Chosen Model
 
-[Your existing content]
+1.	Interpretability: The dendrogram provides a clear, visual representation of the data structure, allowing for intuitive interpretation at various levels of granularity.
+2.	Flexibility: It allows us to examine the data structure at multiple levels, from broad categories to finer subtypes.
+3.	Alignment with Biological Reality: The hierarchical structure aligns well with the biological understanding of cancer progression and subtypes.
+4.	Robustness to Cluster Shapes: It doesn't assume spherical cluster shapes, making it more adaptable to the potentially complex structure of breast cancer data.
+5.	Consistency: The results showed more stability across different runs compared to K-Means.
+
+Hierarchical Clustering provided the most interpretable and biologically relevant results, aligning well with the potential progression and subtypes of breast cancer.
 
 ### 7.3. How it Best Addresses the Analysis Objectives
 
-[Your existing content]
+The hierarchical structure allows for examination at multiple levels of granularity, potentially revealing both major categories and subtle subtypes of tumours.
+1.	Tumor Subtype Identification: The hierarchical structure allows for the identification of main tumour types while also revealing subtypes within these main categories.
+2.	Spectrum of Characteristics: It captures the spectrum of tumour characteristics, aligning with our finding that breast cancer presents more as a continuum than distinct categories.
+3.	Insight into Tumor Progression: The hierarchical structure can potentially offer insights into the progression of tumours.
+4.	Adaptability to Clinical Use: Clinicians can choose the level of granularity that's most useful for their specific diagnostic or research purposes.
+5.	Facilitates Further Research: The hierarchical structure provides a framework for more detailed investigation into specific subgroups or transition points between tumour types.
 
 ### 7.4. Cross-Validation for Clustering
 
@@ -238,11 +312,27 @@ Quantitative Results:
 
 ### 8.2. Relation to Known Tumor Classifications
 
-[Your existing content]
+The clustering results align well with the known binary classification of breast tumors (benign vs. malignant). However, the presence of subclusters and the continuous distribution seen in DBSCAN suggest that this binary classification might be an oversimplification. The analysis reveals a more nuanced structure that could correspond to different grades or stages of tumor development.
 
 ## 9. Limitations of the Study
 
-[Your existing content]
+Among the various limitations of this study, three stand out as particularly significant:
+•	Unsupervised Nature of Analysis
+•	Dataset Characteristics
+•	Clinical Context and Interpretability
+
+**Unsupervised Nature of Analysis**
+The unsupervised nature of our analysis, while powerful for discovering hidden patterns, presents a fundamental limitation in the context of breast cancer diagnosis. By not utilizing the known diagnostic labels in the initial clustering process, we risk overlooking clinically significant distinctions that may not be prominently reflected in the feature space. This approach, while valuable for identifying potential new subtypes or patterns, lacks the direct validation against known outcomes that supervised methods provide. Consequently, the clusters we've identified, though statistically significant, may not align perfectly with clinically relevant categories. This limitation is particularly critical in a medical context where the end goal is accurate diagnosis and treatment planning.
+
+**Dataset Characteristics**
+The characteristics of our dataset, including its size and composition, also pose significant constraints on the generalizability and robustness of our findings. While substantial, our sample may not capture the full spectrum of breast cancer variations, potentially missing rare subtypes or failing to represent the true diversity of patient populations. This limitation is compounded by the lack of demographic information and longitudinal data, which could provide crucial context for understanding how tumor characteristics vary across different populations and how they evolve over time. The static nature of our data fails to capture the dynamic progression of cancer, a key factor in prognosis and treatment planning.
+
+
+**Clinical Context and Interpretability**
+Lastly, the challenge of bridging the gap between our data-driven findings and clinical context represents a critical limitation. Our analysis, based purely on tumor characteristics, doesn't account for the myriads of other factors that clinicians consider in diagnosis and treatment planning, such as patient history, genetic predisposition, and overall health status. Moreover, the interpretability of complex clustering models poses a significant hurdle in translating our findings into actionable insights for medical professionals. The tension between model complexity, which may better capture the nuances of tumor characteristics, and interpretability, which is crucial for clinical application, remains a key challenge. This limitation underscores the need for close collaboration between data scientists and medical professionals to ensure that analytical insights are both statistically robust and clinically relevant.
+
+These limitations collectively highlight the need for cautious interpretation of our results and point towards important directions for future research, including the integration of supervised techniques, expansion of dataset diversity, and development of more clinically interpretable models.
+
 
 ## 10. Practical Implications
 
@@ -301,25 +391,183 @@ By carefully considering these ethical and privacy concerns, we can work towards
 
 ### 12.1. Short-term Actions
 
-[Your existing content]
+1.	Validate the clustering results against known diagnoses to assess their clinical relevance.
+2.	Investigate the characteristics of the identified subclusters to understand their biological significance.
+3.	Develop a prototype diagnostic tool based on the clustering insights.
 
 ### 12.2. Long-term Research Directions
 
-[Your existing content, with the following additions]
-
+1.	Conduct longitudinal studies to track how tumours progress through the identified clusters over time. 
+2.	Integrate genetic and molecular data to enhance the clustering model. 
+3.	Explore the potential for using this clustering approach in other types of cancer diagnostics.
 4. Develop a Multi-modal Approach: Investigate the integration of other data types (e.g., genomic data, medical imaging) with our clustering results to create a more comprehensive tumor classification system.
-
 5. Longitudinal Studies: Design and implement long-term studies to track how tumors progress through the identified clusters over time, potentially revealing insights into cancer evolution and treatment resistance.
 
 ## 13. Conclusion
 
-[Your existing content, with the following addition]
+My unsupervised learning analysis of the Breast Cancer Wisconsin (Diagnostic) Dataset has revealed a more complex structure within tumour characteristics than the traditional binary classification suggests. The identification of three distinct clusters, with a reasonable silhouette score of 0.298, indicates that there may be more nuanced categories of breast tumours than previously recognized.
+
+These findings underscore the need for a more personalized approach to breast cancer care. By recognizing the nuanced differences between tumours, we may be able to develop more targeted treatments and improve patient outcomes. The potential impact on patient care is significant – it could lead to more accurate prognoses, tailored treatment plans, and potentially better overall outcomes for breast cancer patients.
+
+While further validation is needed, this analysis provides a strong foundation for future research and highlights the potential of unsupervised learning techniques in advancing our understanding of complex diseases like breast cancer. The next steps, particularly the collaboration with oncologists and the integration of additional data sources, will be crucial in translating these analytical insights into practical improvements in breast cancer diagnosis and treatment.
 
 This study demonstrates the potential of unsupervised learning techniques in uncovering hidden patterns in breast cancer data. By revealing a more nuanced structure in tumor characteristics, we open new avenues for personalized medicine and targeted therapies. While further validation is needed, this work contributes to the growing body of evidence supporting the use of machine learning in oncology, potentially paving the way for more accurate diagnoses and improved patient outcomes.
 
-## 14. Appendix: Code and Additional Visualizations
+## 14. Appendix
 
-[Include key code snippets and additional supporting visualizations here]
+This appendix provides a comprehensive overview of the key code used in the analysis. The code snippets cover data preprocessing, exploratory data analysis, clustering model implementation, model evaluation, and interpretation techniques.
+
+### 14.1 Data Loading and Preprocessing
+
+```python
+import pandas as pd
+import numpy as np
+from sklearn.preprocessing import StandardScaler
+from sklearn.decomposition import PCA
+
+# Load the data
+data = pd.read_csv('breast_cancer_wisconsin.csv')
+
+# Separate features and target
+X = data.drop(['id', 'diagnosis'], axis=1)
+y = data['diagnosis']
+
+# Scale the features
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X)
+
+# Apply PCA
+pca = PCA()
+X_pca = pca.fit_transform(X_scaled)
+```
+
+### 14.2 Exploratory Data Analysis
+
+```python
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Correlation Heatmap
+plt.figure(figsize=(12, 10))
+sns.heatmap(X.corr(), annot=False, cmap='coolwarm')
+plt.title('Feature Correlation Heatmap')
+plt.show()
+
+# PCA Scree Plot
+explained_variance_ratio = pca.explained_variance_ratio_
+cumulative_variance_ratio = np.cumsum(explained_variance_ratio)
+
+plt.figure(figsize=(10, 6))
+plt.plot(range(1, len(explained_variance_ratio)+1), cumulative_variance_ratio, 'bo-')
+plt.xlabel('Number of Components')
+plt.ylabel('Cumulative Explained Variance Ratio')
+plt.title('PCA Scree Plot')
+plt.show()
+```
+
+
+### 14.3 Clustering Models
+
+```python
+from sklearn.cluster import KMeans, AgglomerativeClustering, DBSCAN
+from sklearn.mixture import GaussianMixture
+
+# K-Means
+kmeans = KMeans(n_clusters=3, random_state=42)
+kmeans_labels = kmeans.fit_predict(X_pca[:, :2])
+
+# Hierarchical Clustering
+hierarchical = AgglomerativeClustering(n_clusters=3)
+hierarchical_labels = hierarchical.fit_predict(X_pca[:, :2])
+
+# DBSCAN
+dbscan = DBSCAN(eps=0.5, min_samples=5)
+dbscan_labels = dbscan.fit_predict(X_pca[:, :2])
+
+# Gaussian Mixture Model
+gmm = GaussianMixture(n_components=3, random_state=42)
+gmm_labels = gmm.fit_predict(X_pca[:, :2])
+```
+
+### 14.4 Visualizing Clustering Results
+
+```python
+def plot_clusters(X, labels, title):
+    plt.figure(figsize=(10, 8))
+    scatter = plt.scatter(X[:, 0], X[:, 1], c=labels, cmap='viridis')
+    plt.colorbar(scatter)
+    plt.title(title)
+    plt.xlabel('First Principal Component')
+    plt.ylabel('Second Principal Component')
+    plt.show()
+
+plot_clusters(X_pca[:, :2], kmeans_labels, 'K-Means Clustering')
+plot_clusters(X_pca[:, :2], hierarchical_labels, 'Hierarchical Clustering')
+plot_clusters(X_pca[:, :2], dbscan_labels, 'DBSCAN Clustering')
+plot_clusters(X_pca[:, :2], gmm_labels, 'Gaussian Mixture Model Clustering')
+```
+
+
+
+### 14.5 Model Evaluation
+
+```python
+from sklearn.metrics import silhouette_score
+from sklearn.model_selection import KFold
+
+def cross_validate_clustering(X, model, n_splits=5):
+    kf = KFold(n_splits=n_splits, shuffle=True, random_state=42)
+    silhouette_scores = []
+    
+    for train_index, test_index in kf.split(X):
+        X_train, X_test = X[train_index], X[test_index]
+        model.fit(X_train)
+        labels = model.predict(X_test)
+        silhouette_scores.append(silhouette_score(X_test, labels))
+    
+    return np.mean(silhouette_scores), np.std(silhouette_scores)
+
+# Example for Hierarchical Clustering
+mean_score, std_score = cross_validate_clustering(X_pca[:, :2], AgglomerativeClustering(n_clusters=3))
+print(f"Average Silhouette Score: {mean_score:.3f} (±{std_score:.3f})")
+```
+
+### 14.6 SHAP Values for Interpretation
+
+```python
+import shap
+
+# Assuming hierarchical clustering is our final model
+explainer = shap.KernelExplainer(hierarchical.fit_predict, X_pca[:, :2])
+shap_values = explainer.shap_values(X_pca[:, :2])
+
+shap.summary_plot(shap_values, X_pca[:, :2], plot_type="bar")
+```
+
+
+### 14.7 Additional Visualizations
+
+```python
+# t-SNE Visualization
+from sklearn.manifold import TSNE
+
+tsne = TSNE(n_components=2, random_state=42)
+X_tsne = tsne.fit_transform(X_scaled)
+
+plt.figure(figsize=(10, 8))
+scatter = plt.scatter(X_tsne[:, 0], X_tsne[:, 1], c=y, cmap='viridis')
+plt.colorbar(scatter)
+plt.title('t-SNE Visualization of Breast Cancer Dataset')
+plt.xlabel('t-SNE Component 1')
+plt.ylabel('t-SNE Component 2')
+plt.show()
+
+# Feature Distribution Comparison
+plt.figure(figsize=(12, 6))
+sns.boxplot(x='diagnosis', y='radius_mean', data=data)
+plt.title('Distribution of Mean Radius by Diagnosis')
+plt.show()
+```
 
 ---
 
