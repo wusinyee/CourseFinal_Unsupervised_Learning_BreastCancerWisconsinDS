@@ -45,7 +45,7 @@ Date: 2024-10-21
 
 ## 1. Executive Summary
 
-In this study, I employed unsupervised learning techniques to analyze the Breast Cancer Wisconsin (Diagnostic) Dataset. My goal was to identify distinct groups of breast tumors based on their cellular characteristics, potentially uncovering new insights into tumor classification and improving diagnostic procedures. I used K-Means clustering, Hierarchical Clustering, and DBSCAN, complemented by dimensionality reduction techniques. 
+In this study, I employed unsupervised learning techniques to analyze the Breast Cancer Wisconsin (Diagnostic) Dataset. My goal was to identify distinct groups of breast tumors based on their cellular characteristics, potentially uncovering new insights into tumor classification and improving diagnostic procedures. I used K-Means clustering, Hierarchical Clustering, DBSCAN, and Gaussian Mixture Models, complemented by dimensionality reduction techniques.
 
 The analysis revealed a complex structure within the data, suggesting a spectrum of tumor characteristics rather than clearly delineated categories. Specifically, I identified three main clusters, with the following distribution:
 
@@ -55,8 +55,7 @@ The analysis revealed a complex structure within the data, suggesting a spectrum
 
 This insight could lead to more nuanced diagnostic approaches and personalized treatment strategies in breast cancer care. The silhouette score of 0.298 (±0.030) indicates a reasonable clustering quality, suggesting that while the clusters are distinguishable, there is some overlap between them.
 
-
-
+The practical implications of this study include the potential for more precise tumor classification, which could inform treatment decisions and improve patient outcomes. However, further clinical validation is necessary before these findings can be integrated into medical practice.
 
 
 
