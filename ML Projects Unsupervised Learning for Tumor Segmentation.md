@@ -579,6 +579,122 @@ plt.title('Distribution of Mean Radius by Diagnosis')
 plt.show()
 ```
 
+I'll help you create the GMM analysis and visualization for the breast cancer dataset. Here's the complete code:
+
+```python
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.mixture import GaussianMixture
+from sklearn.preprocessing import StandardScaler
+from sklearn.impute import SimpleImputer
+from sklearn.decomposition import PCA
+
+# Preprocess the data
+# Impute missing values
+imputer = SimpleImputer(strategy='mean')
+X_imputed = imputer.fit_transform(X)
+
+# Scale the features
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X_imputed)
+
+# Use PCA for visualization (reduce to 2 components)
+pca = PCA(n_components=2)
+X_pca = pca.fit_transform(X_scaled)
+
+# Find optimal number of components using BIC
+n_components_range = range(1, 10)
+bic = []
+for n_components in n_components_range:
+    gmm = GaussianMixture(n_components=n_components, random_state=42)
+    gmm.fit(X_scaled)
+    bic.append(gmm.bic(X_scaled))
+
+# Plot BIC scores
+plt.figure(figsize=(10, 6))
+plt.plot(n_components_range, bic, 'bo-')
+plt.xlabel('Number of components')
+plt.ylabel('BIC score')
+plt.title('Model Selection using BIC Score')
+plt.show()
+
+# Fit GMM with optimal number of components (3 based on results)
+gmm = GaussianMixture(n_components=3, random_state=42)
+gmm.fit(X_scaled)
+
+# Get cluster assignments and probabilities
+cluster_labels = gmm.predict(X_scaled)
+cluster_probs = gmm.predict_proba(X_scaled)
+
+# Create visualization
+plt.figure(figsize=(15, 5))
+
+# Plot 1: Cluster Assignments
+plt.subplot(121)
+scatter = plt.scatter(X_pca[:, 0], X_pca[:, 1], c=cluster_labels, cmap='viridis')
+plt.colorbar(scatter)
+plt.title('GMM Clustering Results')
+plt.xlabel('First Principal Component')
+plt.ylabel('Second Principal Component')
+
+# Plot 2: Probability Visualization
+plt.subplot(122)
+# Calculate maximum probability for each point
+max_probs = np.max(cluster_probs, axis=1)
+scatter = plt.scatter(X_pca[:, 0], X_pca[:, 1], c=max_probs, cmap='viridis')
+plt.colorbar(scatter, label='Maximum Probability')
+plt.title('Clustering Probability')
+plt.xlabel('First Principal Component')
+plt.ylabel('Second Principal Component')
+
+plt.tight_layout()
+plt.show()
+
+# Print summary statistics
+print("\nGMM Clustering Summary:")
+print(f"Number of clusters: {gmm.n_components}")
+print("\nCluster sizes:")
+for i in range(gmm.n_components):
+    print(f"Cluster {i}: {np.sum(cluster_labels == i)} samples")
+
+# Calculate average probability for each cluster
+print("\nAverage probability of cluster membership:")
+mean_probs = np.mean(cluster_probs, axis=0)
+for i in range(gmm.n_components):
+    print(f"Cluster {i}: {mean_probs[i]:.3f}")
+
+# Identify uncertain assignments (points with similar probabilities for multiple clusters)
+uncertain_threshold = 0.6  # Maximum probability threshold for uncertain assignments
+uncertain_mask = np.max(cluster_probs, axis=1) < uncertain_threshold
+n_uncertain = np.sum(uncertain_mask)
+print(f"\nNumber of uncertain assignments (max prob < {uncertain_threshold}): {n_uncertain}")
+```
+
+This code will:
+
+1. Preprocess the data using imputation and scaling
+2. Use PCA for dimensionality reduction (for visualization)
+3. Determine the optimal number of components using BIC
+4. Fit the GMM model and create two visualizations:
+   - Cluster assignments
+   - Probability visualization showing the certainty of cluster assignments
+5. Provide summary statistics about the clustering results
+
+The visualizations show:
+- Left plot: The cluster assignments in different colors
+- Right plot: The maximum probability for each point, showing how certain the model is about each assignment
+
+The color intensity in the second plot indicates how confident the model is about the cluster assignment for each point. Darker colors indicate higher certainty, while lighter colors indicate points that lie between clusters.
+
+The summary statistics will help you understand:
+- The size of each cluster
+- The average probability of cluster membership
+- The number of uncertain assignments
+
+This comprehensive analysis provides insights into both the cluster structure of your data and the confidence of the model in its assignments, which is a key advantage of GMM over deterministic clustering methods like K-means.
+
+
 ---
 
 
